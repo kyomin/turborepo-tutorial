@@ -81,4 +81,15 @@ A와 C는 B에 의존한다.
    
 lint, build, test, deploy 작업을 순차적으로 수행한다고 했을 때 Lerna의 경우에 A, C 패키지는 B의 build가 끝날 때까지 build를 수행할 수 없다.   
    
-이에 반해 Turborepo는 build에 의존 관계가 없는 test 작업이 병렬적으로 수행된다.
+이에 반해 Turborepo는 build에 의존 관계가 없는 test 작업이 병렬적으로 수행된다.   
+   
+# 프로젝트 실행
+프로젝트 루트 경로에서
+   
+      yarn install
+      yarn run build
+      yarn run dev   
+   
+를 순차적으로 실행하여 세 작업이 모두 정상적으로 이뤄지면 된다.   
+localhost:3000으로 들어가면 client 페이지가,
+localhost:3001로 들어가면 admin 페이지가 실행됨을 확인할 수 있다.
