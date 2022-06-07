@@ -52,4 +52,13 @@ Vercel사에서 운영하는 프로젝트답게 앱은 기본적으로 Next.js(r
 더 빠른 빌드를 위해 캐시를 클라우드에 올려서 팀원 및 CI/CD 시스템이 공유해 사용할 수 있어 대규모 프로젝트에서 다수의 팀이 협업하는 환경에서 개발 효율성을 높일 수 있다.   
    
 실제로 원격 캐싱을 한 상태에서 빌드를 실행하면 "Remote computation caching enable" 문구와 함께 빌드 시간이 9초에서 3초로 비약적으로 감소하는 것을 확인해볼 수 있다.   
-다만 이 기능은 현재 experimental(beta) 상태이며 Vercel 클라우드를 활용하기 때문에 Vercel의 계정이 필요하다.
+다만 이 기능은 현재 experimental(beta) 상태이며 Vercel 클라우드를 활용하기 때문에 Vercel의 계정이 필요하다.   
+   
+# Pipeline Package Task
+Pipeline은 각 패키지의 package.json 스크립트(태스크) 간 작업 관계를 정의한다.   
+이를 통해 새로 들어온 개발자도 작업 관계를 쉽게 이해할 수 있다.   
+   
+Pipeline 설정은 Turborepo turbo.json에서 확인할 수 있다.   
+(package.json에도 설정 가능하나 turbo.json에 설정하도록 권장하고 있다.)   
+   
+<img width="1120" alt="터보 설정" src="https://user-images.githubusercontent.com/46395776/172350609-119741fe-a8dc-4025-bf6a-972ccc4779c2.png">
