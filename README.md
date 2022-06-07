@@ -32,4 +32,15 @@ Vercel사에서 운영하는 프로젝트답게 앱은 기본적으로 Next.js(r
    
 그 다음 위 명령어로 다시 빌드를 하면 다음과 같이 시간이 대폭 줄어든 것을 확인할 수 있다.   
    
-![캐시 후](https://user-images.githubusercontent.com/46395776/172342450-668dd464-b782-4dc0-9a79-5818104ca5a1.png)
+![캐시 후](https://user-images.githubusercontent.com/46395776/172342450-668dd464-b782-4dc0-9a79-5818104ca5a1.png)   
+   
+그렇다면 이 캐시들은 어떻게 저장되고 있을까?   
+   
+빌드를 하면 /app 하위 패키지들의 .turbo 디렉터리에 각각 로그 파일이 생기고 이 로그에는 해당 빌드에 대한 hash가 저장된다.   
+(Turborepo는 빌드해야 할 항목을 파악하기 위해 타임스탬프를 확인하고 활용하는 대신 파일의 내용에 따른 hash 정책을 사용한다.)   
+이 hash 값들은 아래 이미지와 같이 node_modules/.cache/turbo 하위에 hash로 구분된 스냅샷 폴더와 매칭된다.   
+   
+![빌드 로그](https://user-images.githubusercontent.com/46395776/172344531-3db521f3-e982-46d7-80f3-d9be9ece2396.png)
+![캐시 파일](https://user-images.githubusercontent.com/46395776/172344580-510bf547-fc40-48c0-9226-fd08d69ddd98.png)   
+   
+이렇게 모든 작업에 대한 캐싱을 진행하기 때문에 변화된 부분만 재빌드하고 나머지는 캐싱한 것을 사용하면서 Turborepo는 작업 속도를 높일 수 있다.
