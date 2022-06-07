@@ -1,0 +1,10 @@
+{
+  "name": "turborepo-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "jake",
+  "license": "MIT",
+  "devDependencies": {
+    "turbo": "^1.2.16"
+  }
+}
