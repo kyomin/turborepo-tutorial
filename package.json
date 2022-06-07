@@ -2,9 +2,52 @@
   "name": "turborepo-tutorial",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/kyomin/turborepo-tutorial.git",
   "author": "jake",
   "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --no-cache --parallel --continue"
+  },
+  "baseBranch": "origin/main",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "devDependencies": {
     "turbo": "^1.2.16"
+  },
+  "dependencies": {
+    "typescript": "^4.5.2"
+  },
+  "turbo": {
+    "pipeline": {
+      "build": {
+        "outputs": [
+          "dist/**",
+          ".next/**",
+          "public/dist/**"
+        ],
+        "dependsOn": [
+          "^build"
+        ]
+      },
+      "test": {
+        "outputs": [
+          "coverage/**"
+        ],
+        "dependsOn": []
+      },
+      "lint": {
+        "outputs": []
+      },
+      "dev": {
+        "cache": false
+      },
+      "clean": {
+        "cache": false
+      }
+    }
   }
 }
