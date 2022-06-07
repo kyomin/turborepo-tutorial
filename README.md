@@ -61,4 +61,24 @@ Pipeline은 각 패키지의 package.json 스크립트(태스크) 간 작업 관
 Pipeline 설정은 Turborepo turbo.json에서 확인할 수 있다.   
 (package.json에도 설정 가능하나 turbo.json에 설정하도록 권장하고 있다.)   
    
-<img width="1120" alt="터보 설정" src="https://user-images.githubusercontent.com/46395776/172350609-119741fe-a8dc-4025-bf6a-972ccc4779c2.png">
+<img width="1120" alt="터보 설정" src="https://user-images.githubusercontent.com/46395776/172350609-119741fe-a8dc-4025-bf6a-972ccc4779c2.png">   
+   
+위 설정에서 dependOn은 pipeline key에 해당하는 작업이 의존하는 작업을 의미한다.   
+이 부분에 접두사 ^가 붙으면 각 패키지에 있는 작업을 의미한다.   
+   
+lint는 의존 관계와 상관없이 언제나 수행될 수 있으며,   
+deploy는 Pipeline에서 build, test, lint가 선행되어야 수행됨을 의미한다.   
+   
+Pipeline으로 인해 Turborepo의 스케줄러는 기존의 모노레포에 비해 성능이 강력하다.   
+한 번에 한 태스크씩 수행되는 기존 방식과 다르게 의존성이 없는 작업은 유휴 CPU에서 실행되기 때문에 빌드 시간이 긴 경우에 작업 성능이 비약적으로 높아진다.   
+   
+다음 그림을 살펴보자.   
+   
+![터보레포 파이프라인](https://user-images.githubusercontent.com/46395776/172351744-fb59e6b2-75a2-401f-a7b1-1488b972a1e5.png)   
+   
+A, B, C 세 개의 패키지로 구성된 프로젝트가 있다.   
+A와 C는 B에 의존한다.   
+   
+lint, build, test, deploy 작업을 순차적으로 수행한다고 했을 때 Lerna의 경우에 A, C 패키지는 B의 build가 끝날 때까지 build를 수행할 수 없다.   
+   
+이에 반해 Turborepo는 build에 의존 관계가 없는 test 작업이 병렬적으로 수행된다.
