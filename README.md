@@ -11,3 +11,11 @@ Turborepo는 증분 빌드(incremental build), 원격 캐싱, 병렬 처리 기�
    
       npx create-turbo@latest <PACKAGE_NAME>   
    
+![터보레포 폴더 구조](https://user-images.githubusercontent.com/46395776/172334584-4c234556-ae72-4f34-b9d9-b298a9922cb5.png)   
+   
+위 그림과 같이 /app 하위에 docs, web 앱과   
+공통 패키지인 /packages 하위의 ui, config 패키지가 있는 프로젝트가 생성된다.   
+이 구조는 일반적인 모노레포 프로젝트 구조와 유사해 쉽게 Turborepo를 사용할 수 있도록 한다.   
+   
+Vercel사에서 운영하는 프로젝트답게 앱은 기본적으로 Next.js(react)로 설정된다.   
+그 외에 Express, Remix, pnpm 등 다양한 기술 스택으로 이루어 구성할 수도 있다.
